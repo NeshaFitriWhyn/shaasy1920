@@ -3,19 +3,20 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Kartu Ulang Tahun — Responsive (Mobile First)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Happy Birthday — Surprise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --pink: #ff6fb5;
+            --accent: #ff9ec9;
             --muted: #6b6b78;
-            --card-bg: #fff;
-            --page-bg: linear-gradient(135deg, #fff6fb, #fffaf0);
-            --max-width: 920px;
+            --card: #fff;
+            --bg: linear-gradient(135deg, #fff0f6, #fff8f0);
+            --max: 920px;
         }
 
-        /* Reset */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -30,161 +31,203 @@
         body {
             min-height: 100vh;
             font-family: "Poppins", sans-serif;
-            background: var(--page-bg);
+            background: var(--bg);
             display: flex;
+            align-items: center;
             justify-content: center;
-            align-items: flex-start;
             padding: 28px 16px;
         }
 
-        /* Wrapper (center column) */
-        .wrap {
+        /* Container centered */
+        .container {
             width: 100%;
-            max-width: var(--max-width);
+            max-width: var(--max);
             display: flex;
             flex-direction: column;
             gap: 18px;
             align-items: center;
         }
 
-        /* Card common */
-        .card {
+        /* Top header */
+        .header {
             width: 100%;
-            max-width: 720px;
-            background: var(--card-bg);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.85));
             border-radius: 18px;
-            padding: 20px;
-            box-shadow: 0 12px 30px rgba(240, 120, 170, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            overflow: hidden;
-        }
-
-        /* Start card (bigger visual) */
-        #cardStart {
+            padding: 14px 18px;
             display: flex;
-            gap: 16px;
+            gap: 12px;
             align-items: center;
+            box-shadow: 0 12px 40px rgba(240, 120, 175, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.6);
             justify-content: space-between;
         }
 
-        #cardStart .start-left {
-            text-align: center;
+        .brand {
+            display: flex;
+            gap: 12px;
+            align-items: center;
         }
 
-        .start-left {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .h-title {
-            color: var(--pink);
-            font-size: 20px;
+        .logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--accent), var(--pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
             font-weight: 800;
-            line-height: 1.05;
-            margin-bottom: 6px;
+            font-size: 20px;
+            box-shadow: 0 8px 20px rgba(200, 90, 140, 0.08);
+        }
+
+        .title {
+            font-weight: 800;
+            color: var(--pink);
+            font-size: 18px;
         }
 
         .lead {
             color: var(--muted);
-            font-size: 14px;
-            margin-bottom: 12px;
+            font-size: 13px
         }
 
-        .hero-img {
-            width: 110px;
-            height: 110px;
-            border-radius: 14px;
-            object-fit: cover;
+        /* Card styles */
+        .card {
+            width: 100%;
+            background: var(--card);
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 18px 60px rgba(240, 120, 175, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Start card */
+        .starter {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            text-align: center;
+            max-width: 660px;
+        }
+
+        .starter .hero {
+            width: 120px;
+            height: 120px;
+            border-radius: 16px;
+            overflow: hidden;
             box-shadow: 0 10px 30px rgba(200, 100, 150, 0.06);
-            flex-shrink: 0;
+        }
+
+        .starter .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
         }
 
         .btn {
-            background: linear-gradient(90deg, #ff9ec9, #ff6fb5);
-            border: 0;
-            color: white;
-            padding: 12px 18px;
+            background: linear-gradient(90deg, var(--accent), var(--pink));
+            padding: 12px 20px;
             border-radius: 12px;
-            font-weight: 700;
+            border: 0;
+            color: #fff;
+            font-weight: 800;
             cursor: pointer;
             font-size: 15px;
+            box-shadow: 0 10px 30px rgba(160, 50, 120, 0.08);
         }
 
-        /* Kejutan card (typing + video) */
-        #cardBox {
+        .btn.ghost {
+            background: transparent;
+            color: var(--pink);
+            border: 1px dashed rgba(255, 107, 181, 0.18);
+            box-shadow: none;
+            padding: 10px 16px;
+            font-weight: 700;
+        }
+
+        /* Surprise card */
+        #surprise {
             display: none;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+            width: 100%;
+            max-width: 720px;
+            align-items: center
         }
 
-        .card-subtitle {
+        .card-sub {
             color: var(--pink);
             font-weight: 800;
             font-size: 18px;
-            margin-bottom: 8px;
+            margin-bottom: 6px
         }
 
         #message {
-            font-size: 16px;
-            color: #222;
-            font-weight: 600;
-            white-space: pre-line;
+            width: 100%;
             min-height: 120px;
+            font-weight: 700;
+            color: #333;
+            font-size: 16px;
+            white-space: pre-line;
             border-right: 2px solid rgba(30, 30, 40, 0.12);
             padding-right: 8px;
-            margin-bottom: 10px;
-            width: 100%;
         }
 
-        /* Video wrapper responsive */
+        /* Video */
         .videoWrap {
             width: 100%;
             display: flex;
-            justify-content: center;
+            justify-content: center
         }
 
-        .videoWrap video {
-            width: auto;
-            max-width: 100%;
+        video {
+            width: 100%;
+            max-width: 540px;
             height: auto;
+            border-radius: 12px;
             display: none;
+            box-shadow: 0 12px 40px rgba(180, 80, 140, 0.06);
+            background: #000;
         }
 
-        /* small helper text */
-        .small {
-            color: var(--muted);
+        /* small row */
+        .row {
+            display: flex;
+            gap: 10px;
+            align-items: center
+        }
+
+        .muted-note {
             font-size: 13px;
-            margin-top: 8px;
+            color: var(--muted)
         }
 
-        /* responsive adjustments: mobile-first */
-        @media(min-width:700px) {
-            body {
-                padding: 48px
-            }
-
-            .wrap {
-                gap: 22px
-            }
-
-            #cardStart {
-                padding: 26px
-            }
-
-            .hero-img {
-                width: 130px;
-                height: 130px
-            }
-
-            .videoWrap video {
-                max-width: 520px
-            }
+        /* footer */
+        .footer {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 6px
         }
 
-        @media(min-width:1000px) {
-            .card {
-                max-width: 820px
+        @media(min-width:900px) {
+            .header {
+                padding: 18px 22px
+            }
+
+            .starter {
+                flex-direction: row;
+                align-items: center;
+                text-align: left
+            }
+
+            .starter .meta {
+                flex: 1
             }
 
             .videoWrap video {
@@ -195,100 +238,177 @@
 </head>
 
 <body>
-    <div class="wrap">
-        <!-- CARD PEMBUKA -->
-        <div class="cardWrapper">
-            <div class="card" id="cardStart" aria-label="Kartu pembuka">
-                <div class="start-left">
-                    <div class="h-title">🎉 Happy Birthday! 🎉</div>
-                    <div class="lead">There’s something special for you. Click the button to reveal the surprise..</div>
-                    <div style="margin-top:14px;">
-                        <button class="btn" id="openBtn">Open The surprise ✨</button>
-                    </div>
+    <div class="container" role="main">
+
+        <header class="header">
+            <div class="brand">
+                <div class="logo">HBD</div>
+                <div>
+                    <div class="title">Happy Birthday — Surprise</div>
+                    <div class="lead">Kejutan interaktif dengan musik & video</div>
                 </div>
             </div>
-        </div>
+            <div class="row">
+                <button class="btn ghost" id="resetBtn" title="Reset page">Reset</button>
+            </div>
+        </header>
 
+        <!-- starter card -->
+        <section class="card starter" id="cardStart" aria-label="Kartu pembuka">
+            <div class="hero">
+                <!-- image you uploaded -->
+                <img src="/mnt/data/1b7e0326-9811-4086-874d-78b3f297b497.png" alt="cover">
+            </div>
 
-        <!-- CARD KEJUTAN -->
-        <div class="card" id="cardBox" aria-live="polite">
-            <div class="card-subtitle">22 November 2025 ✨</div>
+            <div class="meta" style="padding:6px 8px">
+                <div style="font-weight:900;font-size:20px;color:var(--pink)">Hai… ada sesuatu untukmu 🎂</div>
+                <div style="margin-top:8px;color:var(--muted)">Klik tombol di bawah untuk mulai — aplikasi akan
+                    menampilkan ucapan & video.</div>
+                <div style="margin-top:14px">
+                    <button class="btn" id="openBtn">Buka Kejutan ✨</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- surprise card -->
+        <section class="card" id="surprise" aria-live="polite">
+            <div class="card-sub">Untuk Sahabat Spesial ✨</div>
 
             <div id="message" aria-atomic="true"></div>
 
-            <div class="videoWrap">
-                <video id="video1" src="video.mp4" playsinline></video>
+            <div class="videoWrap" style="margin-top:6px">
+                <!-- video1 muted so mobile allows playback after user gesture -->
+                <video id="video1" src="video.mp4" playsinline muted></video>
             </div>
 
-            <div class="videoWrap" style="margin-top:10px;">
+            <div class="videoWrap" style="margin-top:12px">
                 <video id="video2" src="video2.mp4" playsinline></video>
             </div>
-        </div>
+
+            <div class="row" style="margin-top:12px">
+                <div class="muted-note">Tip: Jika suara tidak keluar, tap video untuk enable audio.</div>
+            </div>
+
+            <div class="footer">🎀 dibuat spesial • Jangan bagikan link ini jika ingin surprise tetap rahasia</div>
+        </section>
+
     </div>
 
-    <!-- Backsound (diputar saat video2 mulai) -->
+    <!-- audios -->
     <audio id="backsound" src="lauv.mp3" preload="auto"></audio>
+    <audio id="jam" src="jamrud.mp3" preload="auto"></audio>
 
     <script>
-        // Elements
         const openBtn = document.getElementById('openBtn');
+        const resetBtn = document.getElementById('resetBtn');
         const cardStart = document.getElementById('cardStart');
-        const cardBox = document.getElementById('cardBox');
+        const surprise = document.getElementById('surprise');
         const messageEl = document.getElementById('message');
         const video1 = document.getElementById('video1');
         const video2 = document.getElementById('video2');
         const backsound = document.getElementById('backsound');
+        const jam = document.getElementById('jam');
 
-        // Message text
-        const messageText = `
-Happy birthday, Mba Nur 💗🎉
-Hope your day is full of laughter, love, and sweet little surprises.
-May all your wishes come true.
-From Necaa, to my Sumala 🧟‍♀️💗💗💗💗`;
+        const text = `Selamat Ulang Tahun! 🎉
 
-        // Typing effect helper (async/await style)
-        function typeText(targetEl, text, speed = 30) {
+Semoga harimu penuh tawa, cinta,
+dan kejutan manis.
+
+Semoga semua harapanmu terkabul. 💖
+
+Dari seseorang yang membuat ini spesial untukmu.`;
+
+        // tiny confetti helper (particle-lite)
+        function spawnConfetti() {
+            for (let i = 0; i < 30; i++) {
+                const el = document.createElement('div');
+                el.style.position = 'fixed';
+                el.style.left = (20 + Math.random() * 60) + '%';
+                el.style.top = (10 + Math.random() * 50) + '%';
+                el.style.width = (6 + Math.random() * 8) + 'px';
+                el.style.height = (10 + Math.random() * 12) + 'px';
+                el.style.background = ['#ff6fb5', '#ffd36b', '#7a6bff', '#4be1c6', '#ff8a5b'][Math.floor(Math.random() * 5)];
+                el.style.transform = `rotate(${Math.random() * 360}deg)`;
+                el.style.borderRadius = '2px';
+                el.style.opacity = '0.95';
+                el.style.zIndex = 2000;
+                el.style.pointerEvents = 'none';
+                el.style.transition = 'transform 1.6s linear, opacity 1.6s';
+                document.body.appendChild(el);
+                requestAnimationFrame(() => {
+                    el.style.transform = `translateY(${200 + Math.random() * 200}px) rotate(${Math.random() * 720}deg)`;
+                    el.style.opacity = '0';
+                });
+                setTimeout(() => el.remove(), 1800);
+            }
+        }
+
+        // typing effect
+        function typeText(el, text, speed = 32) {
             return new Promise(resolve => {
-                targetEl.textContent = '';
+                el.textContent = '';
                 let i = 0;
                 const t = setInterval(() => {
-                    targetEl.textContent += text[i] ?? '';
+                    el.textContent += text[i] ?? '';
                     i++;
-                    if (i >= text.length) {
-                        clearInterval(t);
-                        resolve();
-                    }
+                    if (i >= text.length) { clearInterval(t); resolve(); }
                 }, speed);
             });
         }
 
-        // click to open surprise
         openBtn.addEventListener('click', async () => {
-            // hide start card and reveal surprise card (with smoothness)
+            // user interaction — allows audio playback later
             cardStart.style.display = 'none';
-            cardBox.style.display = 'flex';
-            cardBox.style.flexDirection = 'column';
-            // typing effect
-            await typeText(messageEl, messageText, 35);
+            surprise.style.display = 'flex';
+            surprise.style.flexDirection = 'column';
+            // small flourish
+            spawnConfetti();
+            // jamrud (optional short intro) play muted? user already clicked; play as memory music then pause before video2
+            try { jam.play().catch(() => { }); } catch (e) { }
+            await typeText(messageEl, text, 34);
 
-            // small delay then show & play video1
-            setTimeout(async () => {
-                video1.style.display = 'block';
-                try { await video1.play(); } catch (e) { /* autoplay blocked; user can tap */ }
-            }, 450);
+            // show video1 and play (video1 is muted — mobile allows)
+            video1.style.display = 'block';
+            try { await video1.play(); } catch (e) {/* user gesture needed */ }
         });
 
-        // when video1 ends -> hide video1, show video2 + play backsound
+        // when video1 ends -> show video2, play video2 + backsound
         video1.addEventListener('ended', async () => {
+            // small celebration
+            spawnConfetti();
+            // stop jam intro if it's playing
+            try { jam.pause(); jam.currentTime = 0; } catch (e) { }
+
+            // hide video1, show video2
             video1.style.display = 'none';
             video2.style.display = 'block';
-            // try to play video2 and backsound; catches in case autoplay blocked
-            try { await video2.play(); } catch (e) { }
-            try { await backsound.play(); } catch (e) { }
+
+            // now un-mute video2 if it has sound; playback allowed because user already clicked
+            try { await video2.play(); } catch (e) { /* silent fail */ }
+
+            // play background audio (lauv)
+            try { await backsound.play(); } catch (e) {
+                // if autoplay blocked, show note to user
+                console.warn('backsound blocked — requires user interaction');
+            }
         });
 
-        // Accessibility: if user taps video1 to play manually and it starts, keep normal flow.
-        // If video2 ends, keep it visible (user can replay by native controls).
+        // add reset: reload page
+        resetBtn.addEventListener('click', () => location.reload());
+
+        // accessibility: tap any video to toggle mute (helpful on iOS)
+        [video1, video2].forEach(v => {
+            v.addEventListener('click', () => {
+                if (v.muted) { v.muted = false; v.controls = true; }
+            });
+        });
+
+        // safety: if user leaves, pause media
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                try { video1.pause(); video2.pause(); backsound.pause(); jam.pause(); } catch (e) { }
+            }
+        });
     </script>
 </body>
 
