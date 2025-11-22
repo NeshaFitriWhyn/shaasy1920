@@ -2,420 +2,319 @@
 <html lang="id">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Happy Birthday — Surprise</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
-        rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBD Surprise — Full Merge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --pink: #ff6fb5;
-            --accent: #ff9ec9;
-            --muted: #6b6b78;
-            --card: #fff;
-            --bg: linear-gradient(135deg, #fff0f6, #fff8f0);
-            --max: 920px;
-        }
-
+        /* ---------- Reset & global ---------- */
         * {
-            box-sizing: border-box;
             margin: 0;
-            padding: 0
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
-        html,
-        body {
-            height: 100%
-        }
-
-        body {
-            min-height: 100vh;
-            font-family: "Poppins", sans-serif;
-            background: var(--bg);
+        body,
+        html {
+            height: 100%;
+            margin: 0;
             display: flex;
-            align-items: center;
             justify-content: center;
-            padding: 28px 16px;
+            align-items: center;
+            background: linear-gradient(135deg, #fff0f6, #fff8f0);
+            font-family: 'Poppins', sans-serif;
         }
 
-        /* Container centered */
-        .container {
-            width: 100%;
-            max-width: var(--max);
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            align-items: center;
+        canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
         }
 
-        /* Top header */
-        .header {
-            width: 100%;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.85));
-            border-radius: 18px;
-            padding: 14px 18px;
-            display: flex;
-            gap: 12px;
+        /* ---------- Stage ---------- */
+        .stage {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 26px;
             align-items: center;
-            box-shadow: 0 12px 40px rgba(240, 120, 175, 0.06);
+            justify-items: center;
+            /* <-- buat semua item di grid center horizontal */
+            padding: 28px;
+            border-radius: 22px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.85));
+            box-shadow: 0 14px 60px rgba(233, 79, 126, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.6);
-            justify-content: space-between;
         }
 
-        .brand {
-            display: flex;
-            gap: 12px;
-            align-items: center;
+        @media(max-width:900px) {
+            .stage {
+                grid-template-columns: 1fr;
+                padding: 18px;
+            }
+        }
+
+        /* ---------- Left column ---------- */
+        .left {
+            padding: 8px;
         }
 
         .logo {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, var(--accent), var(--pink));
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #ff6fb5, #6ef0d6);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
+            color: white;
             font-weight: 800;
-            font-size: 20px;
-            box-shadow: 0 8px 20px rgba(200, 90, 140, 0.08);
+            font-size: 22px;
+            box-shadow: 0 10px 30px rgba(160, 50, 120, 0.08);
         }
 
         .title {
+            font-size: 20px;
             font-weight: 800;
-            color: var(--pink);
-            font-size: 18px;
+            margin-left: 12px;
         }
 
         .lead {
-            color: var(--muted);
-            font-size: 13px
+            color: #6b6b78;
+            margin-top: 8px;
+            max-width: 44ch;
         }
 
-        /* Card styles */
-        .card {
-            width: 100%;
-            background: var(--card);
-            border-radius: 18px;
-            padding: 20px;
-            box-shadow: 0 18px 60px rgba(240, 120, 175, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-
-        /* Start card */
-        .starter {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            text-align: center;
-            max-width: 660px;
-        }
-
-        .starter .hero {
-            width: 120px;
-            height: 120px;
+        .welcomeCard {
+            margin-top: 18px;
+            padding: 18px;
             border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(200, 100, 150, 0.06);
+            background: linear-gradient(180deg, #fff, #fff8);
+            box-shadow: 0 8px 30px rgba(120, 40, 80, 0.04);
         }
 
-        .starter .hero img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block
+        .ctaRow {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
         }
 
         .btn {
-            background: linear-gradient(90deg, var(--accent), var(--pink));
-            padding: 12px 20px;
-            border-radius: 12px;
+            background: linear-gradient(90deg, #ff9ec9, #ff6fb5);
             border: 0;
-            color: #fff;
-            font-weight: 800;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-weight: 700;
             cursor: pointer;
-            font-size: 15px;
-            box-shadow: 0 10px 30px rgba(160, 50, 120, 0.08);
+            box-shadow: 0 8px 22px rgba(122, 107, 255, 0.08);
         }
 
         .btn.ghost {
             background: transparent;
-            color: var(--pink);
+            color: #ff6fb5;
             border: 1px dashed rgba(255, 107, 181, 0.18);
             box-shadow: none;
-            padding: 10px 16px;
-            font-weight: 700;
         }
 
-        /* Surprise card */
-        #surprise {
+        /* ---------- Game Panel ---------- */
+        .gamePanel {
+            margin-top: 16px;
+            padding: 14px;
+            border-radius: 14px;
+            background: linear-gradient(180deg, #fff, #fff8);
+            min-height: 220px;
+            position: relative;
+            overflow: hidden;
             display: none;
-            width: 100%;
-            max-width: 720px;
-            align-items: center
         }
 
-        .card-sub {
-            color: var(--pink);
-            font-weight: 800;
+        .hud {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: flex-start;
+            margin-top: 10px;
+        }
+
+        .badge {
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(255, 107, 181, 0.08);
+            font-weight: 700;
+            color: #ff6fb5;
+        }
+
+        .balloon {
+            position: absolute;
+            width: 88px;
+            cursor: pointer;
+            transition: transform .15s ease;
+            z-index: 3;
+        }
+
+        .balloon.pop {
+            transform: scale(.08) rotate(-20deg);
+            opacity: 0;
+            transition: transform .45s cubic-bezier(.2, .9, .2, 1), opacity .45s;
+        }
+
+        /* ---------- Right column ---------- */
+        .right {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+        }
+
+        .card3d {
+            width: 380px;
+            height: 240px;
+            perspective: 1200px;
+            border-radius: 20px;
+        }
+
+        .cardInner {
+            width: 100%;
+            height: 100%;
+            border-radius: 18px;
+            transform-style: preserve-3d;
+            transition: transform 800ms cubic-bezier(.2, .9, .3, 1);
+            box-shadow: 0 20px 60px rgba(240, 120, 175, 0.08);
+        }
+
+        .face {
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+        }
+
+        .front {
+            background: linear-gradient(135deg, #fff1f6, #fff9f1);
+        }
+
+        .back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, #fff9fb, #fff4ff);
+            text-align: center;
+        }
+
+        .cardTitle {
+            font-weight: 900;
+            font-size: 20px;
+            color: #ff6fb5;
+        }
+
+        .cardName {
+            font-weight: 700;
+            color: #444;
+            margin-top: 8px;
+        }
+
+        #hbdText {
             font-size: 18px;
-            margin-bottom: 6px
-        }
-
-        #message {
-            width: 100%;
-            min-height: 120px;
             font-weight: 700;
             color: #333;
-            font-size: 16px;
             white-space: pre-line;
             border-right: 2px solid rgba(30, 30, 40, 0.12);
-            padding-right: 8px;
+            padding-right: 6px;
+            display: inline-block;
         }
 
-        /* Video */
-        .videoWrap {
-            width: 100%;
-            display: flex;
-            justify-content: center
-        }
-
+        /* ---------- Video ---------- */
         video {
             width: 100%;
-            max-width: 540px;
-            height: auto;
-            border-radius: 12px;
+            max-height: 70vh;
+            margin-top: 12px;
             display: none;
-            box-shadow: 0 12px 40px rgba(180, 80, 140, 0.06);
-            background: #000;
+            border-radius: 12px;
         }
 
-        /* small row */
-        .row {
-            display: flex;
-            gap: 10px;
-            align-items: center
+        .hidden {
+            display: none;
         }
 
-        .muted-note {
-            font-size: 13px;
-            color: var(--muted)
-        }
-
-        /* footer */
-        .footer {
-            font-size: 12px;
-            color: var(--muted);
-            margin-top: 6px
-        }
-
-        @media(min-width:900px) {
-            .header {
-                padding: 18px 22px
-            }
-
-            .starter {
-                flex-direction: row;
-                align-items: center;
-                text-align: left
-            }
-
-            .starter .meta {
-                flex: 1
-            }
-
-            .videoWrap video {
-                max-width: 640px
-            }
+        /* ---------- Confetti pieces ---------- */
+        .confetti-piece {
+            position: fixed;
+            pointer-events: none;
+            z-index: 6;
         }
     </style>
 </head>
 
-<body>
-    <div class="container" role="main">
-
-        <header class="header">
-            <div class="brand">
+<body> <!-- CANVAS --> <canvas id="particles"></canvas> <canvas id="confetti"></canvas> <!-- STAGE -->
+    <div class="stage" role="main" aria-label="Birthday surprise">
+        <div class="left">
+            <div style="display:flex;align-items:center;">
                 <div class="logo">HBD</div>
-                <div>
+                <div style="margin-left:12px">
                     <div class="title">Happy Birthday — Surprise</div>
-                    <div class="lead">Kejutan interaktif dengan musik & video</div>
+                    <div class="lead">Kejutan interaktif dengan musik, mini-game, confetti, dan video otomatis.</div>
+                </div>
+            </div> <!-- Welcome Card -->
+            <div class="welcomeCard" id="panelWelcome">
+                <div style="display:flex;align-items:center;gap:12px">
+                    <div style="font-weight:900;font-size:18px">Hai… ada sesuatu untukmu 🎂</div>
+                </div>
+                <div style="margin-top:12px;color:#6b6b78">Klik area ini sekali untuk mulai. Musik memori akan muncul,
+                    lalu main pop balon.</div>
+                <div class="ctaRow"> <button class="btn" id="startBtn">Mulai Kejutan</button> <button class="btn ghost"
+                        id="howBtn">Cara kerja</button> </div>
+            </div> <!-- Game Panel -->
+            <div class="gamePanel" id="panelGame">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                    <div style="font-weight:800">Mini Game: Pop 5 Balon!</div>
+                    <div class="hud">
+                        <div class="badge" id="timer">20</div>
+                        <div style="color:#6b6b78">detik</div>
+                    </div>
+                </div>
+                <div id="gameArea" style="position:relative;height:160px;margin-top:12px"></div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+                    <div style="color:#6b6b78">Pop semua balon sebelum waktu habis untuk membuka kartu.</div>
+                    <div> <button class="btn ghost" id="retry" style="display:none">Ulangi</button> <button class="btn"
+                            id="skipOpen" style="display:none">Buka Kartu</button> </div>
                 </div>
             </div>
-            <div class="row">
-                <button class="btn ghost" id="resetBtn" title="Reset page">Reset</button>
-            </div>
-        </header>
-
-        <!-- starter card -->
-        <section class="card starter" id="cardStart" aria-label="Kartu pembuka">
-            <div class="hero">
-                <!-- image you uploaded -->
-                <img src="/mnt/data/1b7e0326-9811-4086-874d-78b3f297b497.png" alt="cover">
-            </div>
-
-            <div class="meta" style="padding:6px 8px">
-                <div style="font-weight:900;font-size:20px;color:var(--pink)">Hai… ada sesuatu untukmu 🎂</div>
-                <div style="margin-top:8px;color:var(--muted)">Klik tombol di bawah untuk mulai — aplikasi akan
-                    menampilkan ucapan & video.</div>
-                <div style="margin-top:14px">
-                    <button class="btn" id="openBtn">Buka Kejutan ✨</button>
+        </div>
+        <div class="right">
+            <div class="card3d">
+                <div class="cardInner" id="cardInner">
+                    <div class="face front">
+                        <div style="display:flex;flex-direction:column;align-items:center">
+                            <div
+                                style="width:92px;height:92px;border-radius:18px;background:linear-gradient(135deg,#ff9ec9,#ff6fb5);display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:28px">
+                                🎀</div>
+                            <div style="height:10px"></div>
+                            <div class="cardTitle">Selamat Ulang Tahun!</div>
+                            <div class="cardName" id="cardName">Untuk Sahabat Spesial</div>
+                        </div>
+                    </div>
+                    <div class="face back" id="cardBack">
+                        <div id="hbdText"></div> <video id="video1" src="video.mp4" class="hidden" playsinline></video>
+                        <video id="video2" src="video2.mp4" class="hidden" playsinline></video>
+                        <div style="height:8px"></div>
+                        <div style="display:flex;gap:8px;justify-content:center;margin-top:8px"> <button class="btn"
+                                id="playAgain" style="display:none">Mainkan Lagi</button> <button class="btn ghost"
+                                id="downloadCard">Download</button> </div>
+                    </div>
                 </div>
             </div>
-        </section>
-
-        <!-- surprise card -->
-        <section class="card" id="surprise" aria-live="polite">
-            <div class="card-sub">Untuk Sahabat Spesial ✨</div>
-
-            <div id="message" aria-atomic="true"></div>
-
-            <div class="videoWrap" style="margin-top:6px">
-                <!-- video1 muted so mobile allows playback after user gesture -->
-                <video id="video1" playsinline muted controls width="100%">
-                    <source src="https://drive.google.com/uc?export=download&id=1awU6YzeaMtQFwQ35HoroByhreLn22Nzq"
-                        type="video/mp4">
-                </video>
-            </div>
-
-            <div class="videoWrap" style="margin-top:12px">
-                <video id="video2" playsinline controls width="100%">
-                    <source src="https://drive.google.com/uc?export=download&id=1tzKpQZnpMb0nDaSIW0szRbFEYGfK2ON5"
-                        type="video/mp4">
-                </video>
-            </div>
-
-            <div class="row" style="margin-top:12px">
-                <div class="muted-note">Tip: Jika suara tidak keluar, tap video untuk enable audio.</div>
-            </div>
-
-            <div class="footer">🎀 dibuat spesial • Jangan bagikan link ini jika ingin surprise tetap rahasia</div>
-        </section>
-
-    </div>
-
-    <!-- audios -->
-    <audio id="backsound" src="lauv.mp3" preload="auto"></audio>
-    <audio id="jam" src="jamrud.mp3" preload="auto"></audio>
-
-    <script>
-        const openBtn = document.getElementById('openBtn');
-        const resetBtn = document.getElementById('resetBtn');
-        const cardStart = document.getElementById('cardStart');
-        const surprise = document.getElementById('surprise');
-        const messageEl = document.getElementById('message');
-        const video1 = document.getElementById('video1');
-        const video2 = document.getElementById('video2');
-        const backsound = document.getElementById('backsound');
-        const jam = document.getElementById('jam');
-
-        const text = `Selamat Ulang Tahun! 🎉
-
-Semoga harimu penuh tawa, cinta,
-dan kejutan manis.
-
-Semoga semua harapanmu terkabul. 💖
-
-Dari seseorang yang membuat ini spesial untukmu.`;
-
-        // tiny confetti helper (particle-lite)
-        function spawnConfetti() {
-            for (let i = 0; i < 30; i++) {
-                const el = document.createElement('div');
-                el.style.position = 'fixed';
-                el.style.left = (20 + Math.random() * 60) + '%';
-                el.style.top = (10 + Math.random() * 50) + '%';
-                el.style.width = (6 + Math.random() * 8) + 'px';
-                el.style.height = (10 + Math.random() * 12) + 'px';
-                el.style.background = ['#ff6fb5', '#ffd36b', '#7a6bff', '#4be1c6', '#ff8a5b'][Math.floor(Math.random() * 5)];
-                el.style.transform = `rotate(${Math.random() * 360}deg)`;
-                el.style.borderRadius = '2px';
-                el.style.opacity = '0.95';
-                el.style.zIndex = 2000;
-                el.style.pointerEvents = 'none';
-                el.style.transition = 'transform 1.6s linear, opacity 1.6s';
-                document.body.appendChild(el);
-                requestAnimationFrame(() => {
-                    el.style.transform = `translateY(${200 + Math.random() * 200}px) rotate(${Math.random() * 720}deg)`;
-                    el.style.opacity = '0';
-                });
-                setTimeout(() => el.remove(), 1800);
-            }
-        }
-
-        // typing effect
-        function typeText(el, text, speed = 32) {
-            return new Promise(resolve => {
-                el.textContent = '';
-                let i = 0;
-                const t = setInterval(() => {
-                    el.textContent += text[i] ?? '';
-                    i++;
-                    if (i >= text.length) { clearInterval(t); resolve(); }
-                }, speed);
-            });
-        }
-
-        openBtn.addEventListener('click', async () => {
-            // user interaction — allows audio playback later
-            cardStart.style.display = 'none';
-            surprise.style.display = 'flex';
-            surprise.style.flexDirection = 'column';
-            // small flourish
-            spawnConfetti();
-            // jamrud (optional short intro) play muted? user already clicked; play as memory music then pause before video2
-            try { jam.play().catch(() => { }); } catch (e) { }
-            await typeText(messageEl, text, 34);
-
-            // show video1 and play (video1 is muted — mobile allows)
-            video1.style.display = 'block';
-            try { await video1.play(); } catch (e) {/* user gesture needed */ }
-        });
-
-        // when video1 ends -> show video2, play video2 + backsound
-        video1.addEventListener('ended', async () => {
-            // small celebration
-            spawnConfetti();
-            // stop jam intro if it's playing
-            try { jam.pause(); jam.currentTime = 0; } catch (e) { }
-
-            // hide video1, show video2
-            video1.style.display = 'none';
-            video2.style.display = 'block';
-
-            // now un-mute video2 if it has sound; playback allowed because user already clicked
-            try { await video2.play(); } catch (e) { /* silent fail */ }
-
-            // play background audio (lauv)
-            try { await backsound.play(); } catch (e) {
-                // if autoplay blocked, show note to user
-                console.warn('backsound blocked — requires user interaction');
-            }
-        });
-
-        // add reset: reload page
-        resetBtn.addEventListener('click', () => location.reload());
-
-        // accessibility: tap any video to toggle mute (helpful on iOS)
-        [video1, video2].forEach(v => {
-            v.addEventListener('click', () => {
-                if (v.muted) { v.muted = false; v.controls = true; }
-            });
-        });
-
-        // safety: if user leaves, pause media
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                try { video1.pause(); video2.pause(); backsound.pause(); jam.pause(); } catch (e) { }
-            }
-        });
-    </script>
+            <div style="display:flex;gap:10px;"> <button class="btn ghost" id="flipBtn">Buka Kartu</button> <button
+                    class="btn" id="resetBtn">Reset</button> </div>
+        </div>
+    </div> <!-- AUDIO --> <audio id="laguJamrud" src="jamrud.mp3"></audio> <audio id="laguLauv" src="lauv.mp3"></audio>
+    <script> // ---------- Elements ---------- const startBtn = document.getElementById('startBtn'); const howBtn = document.getElementById('howBtn'); const panelWelcome = document.getElementById('panelWelcome'); const panelGame = document.getElementById('panelGame'); const gameArea = document.getElementById('gameArea'); const timerBadge = document.getElementById('timer'); const retryBtn = document.getElementById('retry'); const skipOpenBtn = document.getElementById('skipOpen'); const cardInner = document.getElementById('cardInner'); const flipBtn = document.getElementById('flipBtn'); const resetBtn = document.getElementById('resetBtn'); const hbdText = document.getElementById('hbdText'); const video1 = document.getElementById('video1'); const video2 = document.getElementById('video2'); const playAgain = document.getElementById('playAgain'); const downloadCard = document.getElementById('downloadCard'); const audioJamrud = document.getElementById('laguJamrud'); const audioLauv = document.getElementById('laguLauv'); // ---------- Confetti & hearts ---------- const pCanvas = document.getElementById('particles'); const pCtx = pCanvas.getContext('2d'); const cCanvas = document.getElementById('confetti'); const cCtx = cCanvas.getContext('2d'); function resizeCanvas() { pCanvas.width = cCanvas.width = innerWidth; pCanvas.height = cCanvas.height = innerHeight; } window.addEventListener('resize', resizeCanvas); resizeCanvas(); let hearts = [], confetti = [], confLoop = false; function spawnHeart(x, y) { hearts.push({ x, y, vy: -1.2 + Math.random() * -0.4, vx: (Math.random() - 0.5) * 0.8, alpha: 1, size: 8 + Math.random() * 10, rot: Math.random() * 6.28 }); } function drawHearts() { pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height); for (let i = hearts.length - 1; i >= 0; i--) { const h = hearts[i]; h.x += h.vx; h.y += h.vy; h.alpha -= 0.01; pCtx.save(); pCtx.translate(h.x, h.y); pCtx.rotate(h.rot); pCtx.beginPath(); pCtx.moveTo(0, -h.size / 4); pCtx.bezierCurveTo(-h.size / 2, -h.size / 1.8, -h.size, h.size / 3, 0, h.size); pCtx.bezierCurveTo(h.size, h.size / 3, h.size / 2, -h.size / 1.8, 0, -h.size / 4); pCtx.closePath(); pCtx.fillStyle = rgba(255,110,170,${Math.max(0, h.alpha)}); pCtx.fill(); pCtx.restore(); if (h.alpha <= 0) hearts.splice(i, 1); } requestAnimationFrame(drawHearts); } drawHearts(); function launchConfetti(x = innerWidth / 2, y = innerHeight / 3, count = 80) { for (let i = 0; i < count; i++) { confetti.push({ x, y, vx: (Math.random() - 0.5) * 8, vy: -(Math.random() * 8 + 2), r: 6 + Math.random() * 10, rot: Math.random() * Math.PI * 2, velr: (Math.random() - 0.5) * 0.25, color: ['#ff6fb5', '#ffd36b', '#7a6bff', '#4be1c6', '#ff8a5b'][Math.floor(Math.random() * 5)] }); } if (!confLoop) { confLoop = true; requestAnimationFrame(confLoopFunc); } } function confLoopFunc() { cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height); for (let i = confetti.length - 1; i >= 0; i--) { const p = confetti[i]; p.x += p.vx; p.y += p.vy; p.vy += 0.35; p.rot += p.velr; cCtx.save(); cCtx.translate(p.x, p.y); cCtx.rotate(p.rot); cCtx.fillStyle = p.color; cCtx.fillRect(-p.r / 2, -p.r, p.r, p.r * 1.6); cCtx.restore(); if (p.y > cCanvas.height + 50) confetti.splice(i, 1); } if (confetti.length > 0) requestAnimationFrame(confLoopFunc); else confLoop = false; } // ---------- Game ---------- let game = { popped: 0, total: 5, timeLeft: 20, timerId: null, running: false }; let balloonEls = [], flipped = false; startBtn.addEventListener('click', () => { panelWelcome.style.display = 'none'; panelGame.style.display = 'block'; audioJamrud.play().catch(() => { }); for (let i = 0; i < 25; i++)spawnHeart(innerWidth / 2 + (Math.random() - 0.5) * 200, innerHeight / 2 + (Math.random() - 0.5) * 120); startGame(); }); howBtn.addEventListener('click', () => { alert('Klik "Mulai Kejutan" → musik akan mulai → main pop balon → setelah semua pop, confetti & kartu ucapan muncul → teks typing → video auto-play.'); }); function startGame() { clearGame(); game.popped = 0; game.running = true; game.timeLeft = 20; timerBadge.textContent = game.timeLeft; for (let i = 0; i < game.total; i++) { const el = document.createElement('img'); el.src = "https://pngimg.com/d/balloon_PNG4964.png"; el.className = 'balloon'; el.style.left = (8 + Math.random() * 78) + '%'; el.style.bottom = '-140px'; el.animate([{ transform: 'translateY(0) translateX(0)' }, { transform: translateY(-${140 + Math.random() * 260}px) translateX(${(Math.random() - 0.5) * 40}px) }], { duration: 9000 + Math.random() * 7000, iterations: Infinity, direction: 'alternate', easing: 'linear' }); el.addEventListener('click', () => popBalloon(el)); gameArea.appendChild(el); balloonEls.push(el); } game.timerId = setInterval(() => { game.timeLeft--; timerBadge.textContent = game.timeLeft; if (game.timeLeft <= 0) endGame(false); }, 1000); } function popBalloon(el) { if (!game.running || el.classList.contains('pop')) return; el.classList.add('pop'); game.popped++; const r = el.getBoundingClientRect(); launchConfetti(r.left + r.width / 2, r.top + 20, 8); if (game.popped >= game.total) endGame(true); } function endGame(win) { clearInterval(game.timerId); game.running = false; if (win) { launchConfetti(innerWidth / 2, innerHeight / 3, 140); spawnHeart(innerWidth / 2, innerHeight / 2); audioJamrud.pause(); skipOpenBtn.style.display = 'inline-block'; skipOpenBtn.onclick = openCard; setTimeout(openCard, 900); } else { retryBtn.style.display = 'inline-block'; retryBtn.onclick = () => { retryBtn.style.display = 'none'; clearGame(); startGame(); }; } } function clearGame() { balloonEls.forEach(b => b.remove()); balloonEls = []; clearInterval(game.timerId); retryBtn.style.display = 'none'; skipOpenBtn.style.display = 'none'; } function openCard() { panelGame.style.display = 'none'; document.querySelector('.card3d').style.display = 'block'; cardInner.style.transform = 'rotateY(180deg)'; typeMessage(Selamat Ulang Tahun! 🎉\n\nSemoga harimu penuh tawa, cinta, dan kejutan manis.\nSemoga semua harapanmu terkabul. 💖\n\nDari seseorang yang membuat ini spesial untukmu.); video1.style.display = 'block'; video1.play().catch(() => { }); video1.onended = () => { video1.style.display = 'none'; video2.style.display = 'block'; video2.play().catch(() => { }); audioLauv.play().catch(() => { }); }; playAgain.style.display = 'inline-block'; playAgain.onclick = () => { location.reload(); } } function typeMessage(msg) { let idx = 0; hbdText.textContent = ''; const interval = setInterval(() => { hbdText.textContent += msg[idx]; idx++; if (idx >= msg.length) clearInterval(interval); }, 45); } flipBtn.addEventListener('click', () => { cardInner.style.transform = 'rotateY(180deg)'; openCard(); }); resetBtn.addEventListener('click', () => { location.reload(); }); downloadCard.addEventListener('click', () => { alert('Fungsi download belum terhubung. Bisa diupdate dengan html2canvas atau dom-to-image untuk menyimpan kartu.') }); </script>
 </body>
 
 </html>
