@@ -25,26 +25,21 @@
 
         html,
         body {
-            height: 100%;
-        }
-
-        body {
             min-height: 100vh;
             font-family: "Poppins", sans-serif;
             background: var(--bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: block;
             padding: 28px 16px;
         }
 
         .container {
             width: 100%;
             max-width: var(--max);
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 18px;
             align-items: center;
+            gap: 18px;
         }
 
         .header {
@@ -55,9 +50,9 @@
             display: flex;
             gap: 12px;
             align-items: center;
-            justify-content: space-between;
             box-shadow: 0 12px 40px rgba(240, 120, 175, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.6);
+            justify-content: space-between;
         }
 
         .brand {
@@ -105,10 +100,6 @@
         }
 
         .starter {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
             text-align: center;
             max-width: 660px;
         }
@@ -139,6 +130,24 @@
             font-weight: 800;
             font-size: 18px;
             margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .muted-note {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .footer {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 6px;
         }
 
         .videoWrap {
@@ -148,12 +157,13 @@
             margin-top: 12px;
         }
 
-        video {
+        iframe {
             width: 100%;
             max-width: 560px;
             height: 315px;
             border-radius: 12px;
             box-shadow: 0 12px 40px rgba(180, 80, 140, 0.06);
+            display: block;
             background: #000;
         }
     </style>
@@ -175,7 +185,7 @@
             </div>
         </header>
 
-        <section class="card starter" id="cardStart">
+        <section class="card starter" id="cardStart" aria-label="Kartu pembuka">
             <div class="meta" style="padding:6px 8px">
                 <div style="font-weight:900;font-size:20px;color:var(--pink)">Hai… ada sesuatu untukmu 🎂</div>
                 <div style="margin-top:8px;color:var(--muted)">Klik tombol di bawah untuk mulai — aplikasi akan
@@ -186,26 +196,29 @@
             </div>
         </section>
 
-        <section class="card" id="surprise" style="display:none;">
+        <section class="card" id="surprise" aria-live="polite" style="display:none;">
             <div class="card-sub">Untuk Sahabat Spesial ✨</div>
             <div id="message" aria-atomic="true"
-                style="min-height:120px;font-weight:700;color:#333;font-size:16px;white-space:pre-line;"></div>
+                style="min-height:120px; font-weight:700; color:#333; font-size:16px; white-space:pre-line; text-align:center;">
+            </div>
+
 
             <!-- Video pertama -->
             <div class="videoWrap" id="video1Wrapper" style="display:none;">
-                <video controls>
-                    <source src="https://raw.githubusercontent.com/username/repo/main/video1.mp4" type="video/mp4">
-                    Browsermu tidak mendukung video HTML5.
+                <video id="video1" controls>
+                    <source src="video1.mp4" type="video/mp4">
+                    Browsermu tidak mendukung tag video.
                 </video>
             </div>
 
             <!-- Video kedua -->
             <div class="videoWrap" id="video2Wrapper" style="display:none;">
-                <video controls>
-                    <source src="https://raw.githubusercontent.com/username/repo/main/video2.mp4" type="video/mp4">
-                    Browsermu tidak mendukung video HTML5.
+                <video id="video2" controls>
+                    <source src="video2.mp4" type="video/mp4">
+                    Browsermu tidak mendukung tag video.
                 </video>
             </div>
+
         </section>
 
     </div>
@@ -217,12 +230,13 @@
         const messageEl = document.getElementById('message');
         const video1Wrapper = document.getElementById('video1Wrapper');
         const video2Wrapper = document.getElementById('video2Wrapper');
+        const video1 = document.getElementById('video1');
+        const video2 = document.getElementById('video2');
         const resetBtn = document.getElementById('resetBtn');
 
         openBtn.addEventListener('click', () => {
             cardStart.style.display = 'none';
             surprise.style.display = 'flex';
-            surprise.style.flexDirection = 'column';
 
             // confetti kecil
             for (let i = 0; i < 30; i++) {
@@ -256,20 +270,21 @@
                 i++;
                 if (i >= text.length) {
                     clearInterval(t);
-                    // tampilkan video pertama
+                    // tampilkan video pertama setelah typing effect
                     video1Wrapper.style.display = 'flex';
-                    const vid1 = video1Wrapper.querySelector('video');
-                    vid1.play();
-
-                    vid1.onended = () => {
-                        video2Wrapper.style.display = 'flex';
-                        const vid2 = video2Wrapper.querySelector('video');
-                        vid2.play();
-                    }
                 }
             }, 32);
+
+            // ketika video1 selesai
+            video1.addEventListener('ended', () => {
+                video1Wrapper.style.display = 'none';  // sembunyikan video pertama
+                video2Wrapper.style.display = 'flex';  // tampilkan video kedua
+                video2.play();  // otomatis putar video kedua
+            });
+
         });
 
+        // reset
         resetBtn.addEventListener('click', () => location.reload());
     </script>
 </body>
