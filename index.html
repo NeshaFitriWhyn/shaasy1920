@@ -20,12 +20,12 @@
         * {
             box-sizing: border-box;
             margin: 0;
-            padding: 0
+            padding: 0;
         }
 
         html,
         body {
-            height: 100%
+            height: 100%;
         }
 
         body {
@@ -38,7 +38,6 @@
             padding: 28px 16px;
         }
 
-        /* Container centered */
         .container {
             width: 100%;
             max-width: var(--max);
@@ -48,7 +47,6 @@
             align-items: center;
         }
 
-        /* Top header */
         .header {
             width: 100%;
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.85));
@@ -57,9 +55,9 @@
             display: flex;
             gap: 12px;
             align-items: center;
+            justify-content: space-between;
             box-shadow: 0 12px 40px rgba(240, 120, 175, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.6);
-            justify-content: space-between;
         }
 
         .brand {
@@ -90,10 +88,9 @@
 
         .lead {
             color: var(--muted);
-            font-size: 13px
+            font-size: 13px;
         }
 
-        /* Card styles */
         .card {
             width: 100%;
             background: var(--card);
@@ -107,7 +104,6 @@
             gap: 12px;
         }
 
-        /* Start card */
         .starter {
             display: flex;
             flex-direction: column;
@@ -115,21 +111,6 @@
             gap: 12px;
             text-align: center;
             max-width: 660px;
-        }
-
-        .starter .hero {
-            width: 120px;
-            height: 120px;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(200, 100, 150, 0.06);
-        }
-
-        .starter .hero img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block
         }
 
         .btn {
@@ -153,86 +134,27 @@
             font-weight: 700;
         }
 
-        /* Surprise card */
-        #surprise {
-            display: none;
-            width: 100%;
-            max-width: 720px;
-            align-items: center
-        }
-
         .card-sub {
             color: var(--pink);
             font-weight: 800;
             font-size: 18px;
-            margin-bottom: 6px
+            margin-bottom: 6px;
         }
 
-        #message {
-            width: 100%;
-            min-height: 120px;
-            font-weight: 700;
-            color: #333;
-            font-size: 16px;
-            white-space: pre-line;
-            border-right: 2px solid rgba(30, 30, 40, 0.12);
-            padding-right: 8px;
-        }
-
-        /* Video */
         .videoWrap {
             width: 100%;
             display: flex;
-            justify-content: center
+            justify-content: center;
+            margin-top: 12px;
         }
 
         video {
             width: 100%;
-            max-width: 540px;
-            height: auto;
+            max-width: 560px;
+            height: 315px;
             border-radius: 12px;
-            display: none;
             box-shadow: 0 12px 40px rgba(180, 80, 140, 0.06);
             background: #000;
-        }
-
-        /* small row */
-        .row {
-            display: flex;
-            gap: 10px;
-            align-items: center
-        }
-
-        .muted-note {
-            font-size: 13px;
-            color: var(--muted)
-        }
-
-        /* footer */
-        .footer {
-            font-size: 12px;
-            color: var(--muted);
-            margin-top: 6px
-        }
-
-        @media(min-width:900px) {
-            .header {
-                padding: 18px 22px
-            }
-
-            .starter {
-                flex-direction: row;
-                align-items: center;
-                text-align: left
-            }
-
-            .starter .meta {
-                flex: 1
-            }
-
-            .videoWrap video {
-                max-width: 640px
-            }
         }
     </style>
 </head>
@@ -253,8 +175,7 @@
             </div>
         </header>
 
-        <!-- starter card -->
-        <section class="card starter" id="cardStart" aria-label="Kartu pembuka">
+        <section class="card starter" id="cardStart">
             <div class="meta" style="padding:6px 8px">
                 <div style="font-weight:900;font-size:20px;color:var(--pink)">Hai… ada sesuatu untukmu 🎂</div>
                 <div style="margin-top:8px;color:var(--muted)">Klik tombol di bawah untuk mulai — aplikasi akan
@@ -265,58 +186,45 @@
             </div>
         </section>
 
-        <!-- surprise card -->
-        <section class="card" id="surprise" aria-live="polite">
+        <section class="card" id="surprise" style="display:none;">
             <div class="card-sub">Untuk Sahabat Spesial ✨</div>
+            <div id="message" aria-atomic="true"
+                style="min-height:120px;font-weight:700;color:#333;font-size:16px;white-space:pre-line;"></div>
 
-            <div id="message" aria-atomic="true"></div>
-
-            <div class="videoWrap" style="margin-top:6px">
-                <!-- video1 muted so mobile allows playback after user gesture -->
-                <iframe src="https://drive.google.com/file/d/1awU6YzeaMtQFwQ35HoroByhreLn22Nzq/preview" width="100%"
-                    height="480" allow="autoplay" allowfullscreen></iframe>
+            <!-- Video pertama -->
+            <div class="videoWrap" id="video1Wrapper" style="display:none;">
+                <video controls>
+                    <source src="https://raw.githubusercontent.com/username/repo/main/video1.mp4" type="video/mp4">
+                    Browsermu tidak mendukung video HTML5.
+                </video>
             </div>
 
-            <div class="videoWrap" style="margin-top:12px">
-                <iframe src="https://drive.google.com/file/d/1tzKpQZnpMb0nDaSIW0szRbFEYGfK2ON5/preview" width="100%"
-                    height="480" allow="autoplay" allowfullscreen></iframe>
+            <!-- Video kedua -->
+            <div class="videoWrap" id="video2Wrapper" style="display:none;">
+                <video controls>
+                    <source src="https://raw.githubusercontent.com/username/repo/main/video2.mp4" type="video/mp4">
+                    Browsermu tidak mendukung video HTML5.
+                </video>
             </div>
-
-            <div class="row" style="margin-top:12px">
-                <div class="muted-note">Tip: Jika suara tidak keluar, tap video untuk enable audio.</div>
-            </div>
-
-            <div class="footer">🎀 dibuat spesial • Jangan bagikan link ini jika ingin surprise tetap rahasia</div>
         </section>
 
     </div>
 
-    <!-- audios -->
-    <audio id="backsound" src="lauv.mp3" preload="auto"></audio>
-    <audio id="jam" src="jamrud.mp3" preload="auto"></audio>
-
     <script>
         const openBtn = document.getElementById('openBtn');
-        const resetBtn = document.getElementById('resetBtn');
         const cardStart = document.getElementById('cardStart');
         const surprise = document.getElementById('surprise');
         const messageEl = document.getElementById('message');
-        const video1 = document.getElementById('video1');
-        const video2 = document.getElementById('video2');
-        const backsound = document.getElementById('backsound');
-        const jam = document.getElementById('jam');
+        const video1Wrapper = document.getElementById('video1Wrapper');
+        const video2Wrapper = document.getElementById('video2Wrapper');
+        const resetBtn = document.getElementById('resetBtn');
 
-        const text = `Selamat Ulang Tahun! 🎉
+        openBtn.addEventListener('click', () => {
+            cardStart.style.display = 'none';
+            surprise.style.display = 'flex';
+            surprise.style.flexDirection = 'column';
 
-Semoga harimu penuh tawa, cinta,
-dan kejutan manis.
-
-Semoga semua harapanmu terkabul. 💖
-
-Dari seseorang yang membuat ini spesial untukmu.`;
-
-        // tiny confetti helper (particle-lite)
-        function spawnConfetti() {
+            // confetti kecil
             for (let i = 0; i < 30; i++) {
                 const el = document.createElement('div');
                 el.style.position = 'fixed';
@@ -325,7 +233,7 @@ Dari seseorang yang membuat ini spesial untukmu.`;
                 el.style.width = (6 + Math.random() * 8) + 'px';
                 el.style.height = (10 + Math.random() * 12) + 'px';
                 el.style.background = ['#ff6fb5', '#ffd36b', '#7a6bff', '#4be1c6', '#ff8a5b'][Math.floor(Math.random() * 5)];
-                el.style.transform = `rotate(${Math.random() * 360}deg)`;
+                el.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
                 el.style.borderRadius = '2px';
                 el.style.opacity = '0.95';
                 el.style.zIndex = 2000;
@@ -333,79 +241,36 @@ Dari seseorang yang membuat ini spesial untukmu.`;
                 el.style.transition = 'transform 1.6s linear, opacity 1.6s';
                 document.body.appendChild(el);
                 requestAnimationFrame(() => {
-                    el.style.transform = `translateY(${200 + Math.random() * 200}px) rotate(${Math.random() * 720}deg)`;
+                    el.style.transform = 'translateY(' + (200 + Math.random() * 200) + 'px) rotate(' + (Math.random() * 720) + 'deg)';
                     el.style.opacity = '0';
                 });
                 setTimeout(() => el.remove(), 1800);
             }
-        }
 
-        // typing effect
-        function typeText(el, text, speed = 32) {
-            return new Promise(resolve => {
-                el.textContent = '';
-                let i = 0;
-                const t = setInterval(() => {
-                    el.textContent += text[i] ?? '';
-                    i++;
-                    if (i >= text.length) { clearInterval(t); resolve(); }
-                }, speed);
-            });
-        }
+            // typing effect
+            const text = `Selamat Ulang Tahun! 🎉\n\nSemoga harimu penuh tawa, cinta,\ndan kejutan manis.\n\nSemoga semua harapanmu terkabul. 💖\n\nDari seseorang yang membuat ini spesial untukmu.`;
+            messageEl.textContent = '';
+            let i = 0;
+            const t = setInterval(() => {
+                messageEl.textContent += text[i] ?? '';
+                i++;
+                if (i >= text.length) {
+                    clearInterval(t);
+                    // tampilkan video pertama
+                    video1Wrapper.style.display = 'flex';
+                    const vid1 = video1Wrapper.querySelector('video');
+                    vid1.play();
 
-        openBtn.addEventListener('click', async () => {
-            // user interaction — allows audio playback later
-            cardStart.style.display = 'none';
-            surprise.style.display = 'flex';
-            surprise.style.flexDirection = 'column';
-            // small flourish
-            spawnConfetti();
-            // jamrud (optional short intro) play muted? user already clicked; play as memory music then pause before video2
-            try { jam.play().catch(() => { }); } catch (e) { }
-            await typeText(messageEl, text, 34);
-
-            // show video1 and play (video1 is muted — mobile allows)
-            video1.style.display = 'block';
-            try { await video1.play(); } catch (e) {/* user gesture needed */ }
+                    vid1.onended = () => {
+                        video2Wrapper.style.display = 'flex';
+                        const vid2 = video2Wrapper.querySelector('video');
+                        vid2.play();
+                    }
+                }
+            }, 32);
         });
 
-        // when video1 ends -> show video2, play video2 + backsound
-        video1.addEventListener('ended', async () => {
-            // small celebration
-            spawnConfetti();
-            // stop jam intro if it's playing
-            try { jam.pause(); jam.currentTime = 0; } catch (e) { }
-
-            // hide video1, show video2
-            video1.style.display = 'none';
-            video2.style.display = 'block';
-
-            // now un-mute video2 if it has sound; playback allowed because user already clicked
-            try { await video2.play(); } catch (e) { /* silent fail */ }
-
-            // play background audio (lauv)
-            try { await backsound.play(); } catch (e) {
-                // if autoplay blocked, show note to user
-                console.warn('backsound blocked — requires user interaction');
-            }
-        });
-
-        // add reset: reload page
         resetBtn.addEventListener('click', () => location.reload());
-
-        // accessibility: tap any video to toggle mute (helpful on iOS)
-        [video1, video2].forEach(v => {
-            v.addEventListener('click', () => {
-                if (v.muted) { v.muted = false; v.controls = true; }
-            });
-        });
-
-        // safety: if user leaves, pause media
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                try { video1.pause(); video2.pause(); backsound.pause(); jam.pause(); } catch (e) { }
-            }
-        });
     </script>
 </body>
 
