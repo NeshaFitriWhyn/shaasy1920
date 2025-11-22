@@ -152,9 +152,8 @@
 
         .videoWrap {
             width: 100%;
-            /* full lebar card */
-            max-width: 100%;
-            /* jangan lebih dari card */
+            max-width: 560px;
+            /* lebar card */
             margin-top: 12px;
             display: flex;
             justify-content: center;
@@ -162,15 +161,17 @@
 
         .videoWrap video {
             width: 100%;
-            /* video mengikuti lebar wrapper/card */
+            /* menyesuaikan lebar card */
             height: auto;
-            /* jaga rasio video */
-            max-height: 80vh;
-            /* video tidak melebihi tinggi layar HP */
+            /* menjaga rasio */
             border-radius: 12px;
             box-shadow: 0 12px 40px rgba(180, 80, 140, 0.06);
             background: #000;
+            object-fit: cover;
+            playsinline: true;
+            /* penting supaya iPhone/HP tidak fullscreen */
         }
+
 
 
 
@@ -218,22 +219,22 @@
                 style="min-height:120px; font-weight:700; color:#333; font-size:16px; white-space:pre-line; text-align:center;">
             </div>
 
-
-            <!-- Video pertama -->
+            <!-- Video pertama: user klik play -->
             <div class="videoWrap" id="video1Wrapper" style="display:none;">
-                <video id="video1" controls>
+                <video id="video1" controls playsinline>
                     <source src="video1.mp4" type="video/mp4">
                     Browsermu tidak mendukung tag video.
                 </video>
             </div>
 
-            <!-- Video kedua -->
+            <!-- Video kedua: auto-start setelah video pertama selesai -->
             <div class="videoWrap" id="video2Wrapper" style="display:none;">
-                <video id="video2" controls>
+                <video id="video2" controls playsinline>
                     <source src="video2.mp4" type="video/mp4">
                     Browsermu tidak mendukung tag video.
                 </video>
             </div>
+
 
         </section>
 
