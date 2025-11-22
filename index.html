@@ -152,10 +152,27 @@
 
         .videoWrap {
             width: 100%;
+            /* full lebar card */
+            max-width: 100%;
+            /* jangan lebih dari card */
+            margin-top: 12px;
             display: flex;
             justify-content: center;
-            margin-top: 12px;
         }
+
+        .videoWrap video {
+            width: 100%;
+            /* video mengikuti lebar wrapper/card */
+            height: auto;
+            /* jaga rasio video */
+            max-height: 80vh;
+            /* video tidak melebihi tinggi layar HP */
+            border-radius: 12px;
+            box-shadow: 0 12px 40px rgba(180, 80, 140, 0.06);
+            background: #000;
+        }
+
+
 
         iframe {
             width: 100%;
